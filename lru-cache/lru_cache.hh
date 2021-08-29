@@ -7,7 +7,6 @@
 using namespace std;
 class lru_cache {
         private:
-        private:
                 struct node {
                         int key;
                         int value;
@@ -15,6 +14,7 @@ class lru_cache {
                 };
                 typedef map<int, list<struct node*>::iterator> index;
                 typedef list<struct node*> queue ;
+                typedef pair<int, list<node*>::iterator> index_item;
                 queue m_queue;
                 index m_index;
                 int m_capacity;

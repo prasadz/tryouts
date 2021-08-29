@@ -16,13 +16,13 @@ int lru_cache::set(int key, int value) {
                 }
         }
         if (m_index.size()  == m_capacity) {
-                list<node*>::reverse_iterator rit = m_queue.rbegin();
+                auto rit = m_queue.rbegin();
                 m_index.erase((*rit)->key);
                 delete (*rit);
         } 
         node* new_node = new node(key,value); 
         m_queue.push_front(new_node);
-        m_index.insert(pair<int, list<node*>::iterator>(key, m_queue.begin()));
+        m_index.insert(index_item(key, m_queue.begin()));
         return 0;
 }
 
@@ -31,11 +31,11 @@ int lru_cache::get(int key) {
         if (index_it == m_index.end()) {
                 return -1;
         }
-        list<node*>::iterator it = index_it->second;
+        auto it = index_it->second;
         node* req_node = *it;
         m_queue.erase(it);
         m_queue.push_front(req_node);
-        m_index.insert(pair<int, list<node*>::iterator>(key, m_queue.begin()));
+        m_index.insert(index_item(key, m_queue.begin()));
         return req_node->value;
 }
 
