@@ -8,12 +8,13 @@ int lru_cache::set(int key, int value) {
         auto index_it = m_index.find(key);
         if (index_it != m_index.end()) {
                 node* n = *(index_it->second);
+                int retval = 1;
                 if (n->value != value) {
                         n->value = value;
-                        return 2;
-                } else {
-                        return 1;
+                        retval = 2;
                 }
+                get(key);
+                return retval;
         }
         if (m_index.size()  == m_capacity) {
                 auto rit = m_queue.rbegin();
@@ -40,6 +41,7 @@ int lru_cache::get(int key) {
 }
 
 void lru_cache::print_cache() {
+        cout << "cache: " << endl;
         for (auto it = m_index.begin(); it != m_index.end(); it++) {
                 node* n = *(it->second);
                 cout << it->first << " " << n->key << " "
@@ -48,6 +50,7 @@ void lru_cache::print_cache() {
 }
 
 void lru_cache::print_queue() {
+        cout << "queue: " << endl;
         for (auto i = m_queue.begin(); i != m_queue.end(); i++) {
                node* n = *i;
                cout << n->key << " " << n->value << endl; 
