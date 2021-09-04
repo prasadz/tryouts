@@ -80,3 +80,26 @@ void list::revert() {
         }
         m_root = prev_node;
 }
+
+bool list::insert(size_t position, int data) {
+        if (position == 0 ) {
+                return false;
+        }
+        if (position == 1) {
+                push_front(data); 
+                return true;
+        }
+        node* current_node = m_root;
+        for (int i = 1; i< position - 1 && current_node->next != nullptr 
+                        ; i++) {
+                current_node = current_node->next;
+        }
+        
+        node* new_node = new node(data);
+        new_node->next = current_node->next;
+        current_node->next = new_node;
+        if (current_node == m_last) {
+                m_last = new_node;
+        }
+        return true;
+}

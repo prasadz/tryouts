@@ -23,5 +23,15 @@ int main() {
         l.pop_back();
         l.pop_back();
         l.print();
+
+        cout << endl;
+        l.insert(6, 20);
+        l.insert(7, 15);
+        l.insert(8, 10);
+        l.insert(9, 0);
+        l.insert(3, 55);
+        l.insert(1, 80);
+        l.pop_back();
+        l.print();
         return 0;
 }

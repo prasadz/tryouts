@@ -20,5 +20,6 @@ class list {
                 void pop_front();
                 void revert();
                 void print();
+                bool insert(size_t position, int data);
 };
 #endif
